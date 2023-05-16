@@ -30,14 +30,36 @@ Route::get('/added', 'Auth\RegisterController@added');
 
 
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+Route::get('/top', 'PostsController@index');
 
-Route::get('/profile','UsersController@profile');
+Route::get('/profile', 'UsersController@profile');
 
-Route::get('/search','UsersController@index');
+Route::get('/search', 'UsersController@index');
 
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
+Route::get('/follow-list', 'PostsController@index');
+Route::get('/follower-list', 'PostsController@index');
+Route::post('/follow/create', 'FollowsController@create');
+Route::post('/follow/delete', 'FollowsController@delete');
+
+Route::get('/post/{id}/delete', 'PostsController@delete');
+
+Route::post('/create', 'PostsController@create');
+
+Route::post('/update', 'PostsController@update');
 
 
+// トップページ
+Route::get('/', function () {
+  return view('welcome');
+});
 
+// logoutのページ
+Route::get('/logout', 'Auth\LoginController@logout');
+
+// searchのページ
+Route::get('/search', 'UsersController@search');
+Route::post('/search', 'UsersController@search');
+
+// followsのページ
+Route::get('/followerList', 'FollowsController@followerList');
+Route::get('/followList', 'FollowsController@followList');
